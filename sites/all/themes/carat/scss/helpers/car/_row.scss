@@ -1,0 +1,161 @@
+
+// ---------------------------------------------------------------------------------
+//  Car Display Styles
+//
+//  1. node-car-row - default row
+//  2. node-car-row-footer - car display used in sidebars
+//  3. node-car-row-sidebar - car display used in sidebars
+// ---------------------------------------------------------------------------------
+.node-car-row {
+  @include car-row();
+  .meta {
+    @include car-row-meta();
+  }
+
+  @media (max-width: 768px) {
+    .content-inner {
+      padding: 15px;
+    }
+    .meta {
+      li {
+        margin-bottom: 5px !important;
+      }
+    }
+  }
+}
+
+.node-car-row-footer {
+  @include car-row($color-secondary, rgba(255,255, 255, 0.6));
+  h4 {
+    margin-top: 0px;
+    a {
+      font-weight: bold;
+    }
+  }
+
+  .content-inner {
+    padding: 0px;
+  }
+  .field-name-field-subtitle {
+    margin-bottom: 5px;
+  }
+  .field-name-field-price {
+    margin-bottom: 5px;
+    color: #ffffff;
+  }
+  .field-name-body {
+    margin-bottom: 0px;
+    line-height: 1.3em;
+  }
+
+  @media (min-width: 768px) and (max-width: 990px) {
+    border-bottom: 0px;
+  }
+}
+
+.node-car-row-sidebar {
+  @include car-row();
+  h4 {
+    margin-top: 0px;
+  }
+  @media (min-width: 768px) and (max-width: 990px) {
+    border-bottom: 0px;
+  }
+  .content-inner {
+    padding: 0px;
+  }
+  .field-name-field-subtitle {
+    margin-bottom: 5px;
+  }
+  .field-name-field-price {
+    margin-bottom: 5px;
+  }
+  .field-name-body {
+    margin-bottom: 0px;
+    line-height: 1.3em;
+  }
+}
+
+
+// ---------------------------------------------------------------------------------
+// Block Overrides
+// ---------------------------------------------------------------------------------
+
+.footer-car-rows {
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0px;
+    .node-car-footer-row {
+      border-bottom: 0px;
+      .field-type-image {
+        overflow: hidden;
+        margin-bottom: 0px;
+      }
+      p {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+
+
+
+#block-views-car-sidebar-block {
+  .node-car-row-sidebar {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+  }
+
+  .view-content {
+    > .row {
+      > .col-md-12 {
+        > .row {
+          &:last-child {
+            .node-car-row-sidebar {
+              margin-bottom: 0px;
+              padding-bottom: 0px;
+              border-bottom: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.block {
+  &.row-block {
+    .inner-block {
+      padding: 15px;
+    }
+    .content {
+      @include box-shadow(0px 1px 1px rgba(0, 0, 0, 0.2));
+      padding: 15px 0px;
+    }
+    .row-item-small {
+      .inner {
+        .subtitle {
+          margin-bottom: 5px
+        }
+        .price {
+          margin-bottom: 5px;
+        }
+        .meta {
+          ul {
+            li {
+              margin-right: 0px;
+              padding: 3px 6px;
+              .icon {
+                font-size: 18px;
+                vertical-align: -4px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

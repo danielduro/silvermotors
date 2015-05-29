@@ -1,0 +1,4 @@
+name = Carat feature
+description = Carat additional definitions and features for Feature content type
+core = 7.x
+package = Carat

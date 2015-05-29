@@ -1,0 +1,22 @@
+// primary color variations
+$color-primary: #0076a2;
+$color-primary-darker: darken($color-primary, 15%);
+$color-primary-darkest: darken($color-primary, 17%);
+$color-primary-lighter: #00658b;
+
+// secondary color variations
+$color-secondary: #f95446;
+$color-secondary-light: lighten($color-secondary, 20%);
+
+// default - black
+$color-black: #252525;
+
+// font colors
+$color-gray-lighter: #f2f2f2;
+$color-gray-light: #f8f8f8;
+$color-gray-medium: #464646;
+$color-gray: #f0f0f0;
+$color-gray-dark: #e2e2e2;
+// border colors
+$color-border: #d9d9d9;
+$color-border-dark: #c2c2c2;

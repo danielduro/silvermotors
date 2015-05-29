@@ -1,0 +1,86 @@
+name = Carat
+description = Carat
+core = 7.x
+base theme = bootstrap
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Regions
+;;;;;;;;;;;;;;;;;;;;;
+
+
+regions[topbar_left]                    = 'TopBar: Left'
+regions[topbar_right]                   = 'TopBar: Right'
+regions[navigation]                     = 'Navigation'
+regions[infobar_right]                  = 'Infobar Right'
+regions[highlighted]                    = 'Highlighted'
+regions[slider_filter]                  = 'Slider Filter'
+regions[help]                           = 'Help'
+regions[featured]                       = 'Featured'
+regions[content_top]                    = 'Content: Top'
+regions[content_triptych_first]         = 'Content: Triptych: 1st'
+regions[content_triptych_second]        = 'Content: Triptych: 2nd'
+regions[content_triptych_third]         = 'Content: Triptych: 3rd'
+regions[content]                        = 'Content'
+regions[content_bottom]                 = 'Content: Bottom'
+regions[sidebar_first]                  = 'Primary'
+regions[sidebar_second]                 = 'Secondary'
+
+regions[footer_triptych_first]          = 'Footer: Triptych: 1st'
+regions[footer_triptych_second]         = 'Footer: Triptych: 2nd'
+regions[footer_triptych_third]          = 'Footer: Triptych: 3rd'
+regions[footer_bottom_left]             = 'Footer Bottom: Left'
+regions[footer_bottom_right]            = 'Footer Bottom: Right'
+
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Stylesheets
+;;;;;;;;;;;;;;;;;;;;;
+
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/carat.css
+stylesheets[all][] = icons/justvector-web-font/stylesheet.css
+stylesheets[all][] = libraries/jslider/bin/jquery.slider.min.css
+
+; For information on choosing the desired method, please read the Drupal
+; Bootstrap sub-theme "how-to" documentation:
+; https://drupal.org/node/1978010
+
+; ;----------------------------------
+; ; METHOD 1: Bootstrap Source Files
+; ;----------------------------------
+; 
+; ;;;;;;;;;;;;;;;;;;;;;
+; ;; Scripts
+; ;;;;;;;;;;;;;;;;;;;;;
+; 
+; scripts[] = 'bootstrap/js/affix.js'
+; scripts[] = 'bootstrap/js/alert.js'
+; scripts[] = 'bootstrap/js/button.js'
+; scripts[] = 'bootstrap/js/carousel.js'
+; scripts[] = 'bootstrap/js/collapse.js'
+; scripts[] = 'bootstrap/js/dropdown.js'
+; scripts[] = 'bootstrap/js/modal.js'
+; scripts[] = 'bootstrap/js/tooltip.js'
+; scripts[] = 'bootstrap/js/popover.js'
+; scripts[] = 'bootstrap/js/scrollspy.js'
+; scripts[] = 'bootstrap/js/tab.js'
+; scripts[] = 'bootstrap/js/transition.js'
+
+scripts[] = 'libraries/jslider/bin/jquery.slider.min.js'
+scripts[] = 'libraries/ezMark/js/jquery.ezmark.min.js'
+scripts[] = 'js/carat.js'
+
+
+; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
+; settings[bootstrap_cdn] = ''
+
+
+; ;-------------------------
+; ; METHOD 2: Bootstrap CDN
+; ;-------------------------
+;
+; Method 2 uses BootstrapCDN, the only thing you might need to provide here
+; is overrides to Bootstrap theme settings. Copy them here from the base theme
+; to override.

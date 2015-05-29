@@ -1,0 +1,47 @@
+/** Mixing for creating nice category lists with dot - name - count of items in category **/
+@mixin category-listing() {
+  display: inline-block;
+  font-size: 14px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  li {
+    float: left;
+    display: block;
+    line-height: 20px;
+    margin-bottom: 5px;
+    padding: 3px 0px;
+    width: 100%;
+    .dot-wrapper {
+      display: inline-block;
+      float: left;
+      .dot {
+        background-color: $color-secondary;
+        border-radius: 50%;
+        color: #fff;
+        display: inline-block;
+        height: 14px;
+        margin-right: 10px;
+        margin-top: 3px;
+        width: 14px;
+        i {
+          display: block;
+        }
+      }
+    }
+    a {
+      color: #363636;
+      float: left;
+    }
+    .number {
+      background-color: darken($color-gray-dark, 10%);
+      border-radius: 3px;
+      color: #fff;
+      display: inline-block;
+      float: left;
+      font-size: 11px;
+      margin-left: 8px;
+      padding: 0px 4px;
+    }
+  }
+}

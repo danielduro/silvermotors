@@ -1,0 +1,10 @@
+name = pragmaticmates map
+description = pragmaticmates google map integration
+core = 7.x
+package = pragmaticmates
+
+dependencies[] = gmap3_tools
+dependencies[] = google_map_field
+
+files[] = pragmaticmates_map.views.inc
+files[] = pragmaticmates_map_plugins_style_grid.inc

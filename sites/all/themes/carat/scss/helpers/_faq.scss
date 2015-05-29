@@ -1,0 +1,48 @@
+.faq-item {
+  margin-bottom: 20px;
+  .block-inner {
+    padding: 15px;
+  }
+  .block-title {
+    color: $color-primary;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    h2 {
+      margin-top: 0px;
+    }
+  }
+  .question-mark {
+    color: $color-secondary;
+    display: block;
+    text-align: center;
+    i {
+      font-size: 36px;
+    }
+  }
+  .faq-question {
+    margin: 0px;
+    padding: 0px;
+  }
+  .faq-answer {
+    color: rgba(0, 0, 0, 0.6);
+    padding: 0px;
+    margin-bottom: 10px;
+  }
+  .actions {
+    color: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 10px;
+    .links {
+      margin: 0px;
+    }
+    a {
+      margin: 0px;
+    }
+  }
+}
+
+.faq-categories {
+  ul {
+    @include category-listing();
+  }
+}

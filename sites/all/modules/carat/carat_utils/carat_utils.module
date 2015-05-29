@@ -1,0 +1,440 @@
+<?php
+
+include "carat_utils.field.inc";
+
+/**
+ * Implements hook_block_info().
+ */
+function carat_utils_block_info() {
+  $block['carat_graphic_filter'] = array(
+    'info' => t('Carat: Graphic Filter'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  $block['carat_inline_contact'] = array(
+    'info' => t('Carat: Inline Quick-Contact'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  $block['carat_language_switch'] = array(
+    'info' => t('Carat: Language Switch'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $block;
+}
+
+
+
+/**
+ * Implements hook_block_view().
+ *
+ * Displays a language switcher. Only show if we have at least two languages.
+ */
+function carat_utils_block_view($delta) {
+  $block = array();
+
+  switch ($delta) {
+    case 'carat_inline_contact':
+      $block['subject'] = t('Contact');
+      $block['content'] = theme('carat_utils_contact',
+        array(
+          'mobile' => variable_get('carat_inline_contact_mobile', null),
+          'mail' => variable_get('carat_inline_contact_mail', null),
+          'hours' => variable_get('carat_inline_contact_hours', null),
+        )
+      );
+
+    break;
+    case 'carat_language_switch':
+
+      if (drupal_multilingual()) {
+        $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
+        $links = language_negotiation_get_switch_links('language', $path);
+
+        if (isset($links->links)) {
+          $block['content'] = theme('carat_language_switch', array('links' => $links->links));
+          $block['subject'] = t('Languages');
+
+          return $block;
+        }
+      }
+      break;
+    case 'carat_graphic_filter':
+      $block['content'] = theme('carat_graphic_filter');
+      $block['subject'] = "<none>";
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_block_configure()
+ * @param $delta
+ * @return array
+ */
+function carat_utils_block_configure($delta) {
+  $form = array();
+
+  if ($delta == 'carat_inline_contact') {
+
+    $form['carat_inline_contact_mobile'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Phone number'),
+      '#default_value' => variable_get('carat_inline_contact_mobile', ''),
+    );
+
+    $form['carat_inline_contact_mail'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Mail'),
+      '#default_value' => variable_get('carat_inline_contact_mail', variable_get('site_mail', '')),
+    );
+
+    $form['carat_inline_contact_hours'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Contact hours'),
+      '#default_value' => variable_get('carat_inline_contact_hours', "8:00 - 16:00"),
+    );
+  }
+
+  if($delta == 'carat_graphic_filter') {
+    $options = db_select('taxonomy_vocabulary', 'tv')
+      ->fields('tv', array('vid', 'name'))
+      ->execute()->fetchAllKeyed();
+
+    $form['carat_graphic_filter_vocabulary'] = array(
+      '#type' => 'select',
+      '#title' => t('Taxonomy Vocabulary'),
+      '#options' => $options,
+      '#default_value' => variable_get('carat_graphic_filter_vocabulary', NULL)
+    );
+
+    $query = db_select('field_config_instance', 'fi')
+      ->condition('entity_type', 'taxonomy_term');
+    $query->leftJoin('field_config', 'fc', 'fc.field_name = fi.field_name');
+    $query->condition('fc.type', 'image');
+    $query->fields('fc', array('field_name', 'field_name'));
+    $options = $query->execute()->fetchAllKeyed();
+
+    array_push($options, t("Without image"));
+    $form['carat_graphic_filter_image'] = array(
+      '#type' => 'select',
+      '#title' => t('Image field'),
+      '#options' => $options,
+      '#default_value' => variable_get('carat_graphic_filter_image', 0)
+    );
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_save()
+ * @param $delta
+ * @param $edit
+ */
+function carat_utils_block_save($delta, $edit) {
+
+  if($delta == 'carat_inline_contact') {
+    variable_set('carat_inline_contact_mobile', $edit['carat_inline_contact_mobile']);
+    variable_set('carat_inline_contact_mail', $edit['carat_inline_contact_mail']);
+    variable_set('carat_inline_contact_hours', $edit['carat_inline_contact_hours']);
+  }
+
+  if($delta == 'carat_graphic_filter') {
+    variable_set('carat_graphic_filter_vocabulary', $edit['carat_graphic_filter_vocabulary']);
+    variable_set('carat_graphic_filter_image', $edit['carat_graphic_filter_image']);
+  }
+}
+
+
+/**
+ * Implements hook_theme()
+ * @return array
+ */
+function carat_utils_theme() {
+  return array(
+    'carat_graphic_filter' => array(
+      'variables' => array(),
+      'template' => 'carat-graphic-filter'
+    ),
+    'carat_utils_contact' => array(
+      'variables' => array('mobile', 'mail', 'hours'),
+      'template' => 'carat-utils-contact'
+    ),
+    'carat_language_switch' => arraY(
+      'variables' => array('links'),
+      'template' => 'carat-language-switch',
+    ),
+    'carat_appliances' => array(
+      'variables' => array('items'),
+      'template' => 'carat-appliances',
+    )
+  );
+}
+
+
+function template_preprocess_carat_appliances(&$variables) {
+  $items = $variables['items'];
+  if(count($items)) {
+    $columns = array_chunk($items, ceil(count($items) / 2));
+    $variables['columns'] = $columns;
+  } else {
+    $variables['columns'] = FALSE;
+  }
+}
+
+
+function template_preprocess_carat_language_switch(&$variables) {
+  global $language;
+  $links = & $variables['links'];
+
+  $variables['default_language'] = theme_links(
+    array(
+      'links' =>
+        array(
+          $language->language => $links[$language->language],
+        ),
+      'attributes' => array(),
+      'heading' => NULL,
+    )
+  );
+
+
+  foreach ($links as $key => &$link) {
+    $link['title'] = theme_image(
+      array(
+        'path' => drupal_get_path('module', 'carat_utils') . '/flags/' . $key . '.png',
+        'attributes' => array(),
+        'alt' => $key
+      )
+    );
+    $link['html'] = TRUE;
+  }
+
+
+  $links = theme_links(array('links' => $links, 'attributes' => array(), 'heading' => NULL));
+}
+
+
+function template_preprocess_carat_graphic_filter(&$variables) {
+  $vocabulary_id = variable_get('carat_graphic_filter_vocabulary', 0);
+
+  // retrieve only parent records
+  $query = db_select('taxonomy_term_data', 'ttd')
+    ->fields('ttd', array('tid'))
+    ->condition('vid', $vocabulary_id);
+  $query->leftJoin('taxonomy_term_hierarchy', 'tth', 'tth.tid = ttd.tid');
+  $query->condition('tth.parent', 0);
+  $results = $query->execute()->fetchCol();
+  $parent_terms = taxonomy_term_load_multiple($results);
+
+  foreach($parent_terms as $parent_term) {
+    // load path
+    $path = entity_uri('taxonomy_term', $parent_term);
+    // load image
+    if(variable_get('carat_graphic_filter_image', NULL)) {
+      $image = field_view_field('taxonomy_term', $parent_term, variable_get('carat_graphic_filter_image', NULL), 'default');
+    } else {
+      $image = FALSE;
+    }
+
+    $data = array(
+      'uri' => $path['path'],
+      'name' => $parent_term->name,
+      'image' => $image,
+      'child' => array(),
+    );
+
+    // find child records
+    $child_terms = taxonomy_get_tree($vocabulary_id, $parent_term->tid, 1, TRUE);
+    foreach($child_terms as $child_term) {
+      // load path
+      $path = entity_uri('taxonomy_term', $child_term);
+      $data['child'][] = array(
+        'uri' => $path['path'],
+        'name' => $child_term->name,
+      );
+    }
+
+    $variables['parent_terms'][] = $data;
+  }
+
+}
+
+
+function carat_utils_form_alter(&$form, &$form_state, $form_id) {
+
+
+  if($form_id == 'block_admin_configure' || $form_id == 'block_add_block_form') {
+    $settings = carat_utils_block_load($form['delta']['#value'], $form['module']['#value']);
+
+    $form['settings']['carat'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Carat settings'),
+      '#weight' => 0,
+      '#tree' => TRUE,
+    );
+
+    $form['settings']['carat']['title_size'] = array(
+      '#type' => 'select',
+      '#title' => t('Title Size'),
+      '#options' => array(
+        '2' => 'h2',
+        '3' => 'h3',
+        '4' => 'h4',
+        '5' => 'h5',
+      ),
+      '#default_value' => isset($settings) ? $settings['title_size'] : 2
+    );
+
+    $form['settings']['carat']['title_align'] = array(
+      '#type' => 'select',
+      '#title' => t('Title align'),
+      '#options' => array(
+        'none' => t('None'),
+        'left' => t('Left'),
+        'center' => t('Center'),
+        'right' => t('Right'),
+      ),
+      '#default_value' => isset($settings) ? $settings['title_align'] : 'left',
+    );
+
+    $form['settings']['carat']['title_none']['#markup'] = "
+    <strong> Underline</strong><br/>
+    TITLE<br/>
+    ------------------------------------<br/><br/>";
+
+    $form['settings']['carat']['title_left']['#markup'] = "
+    <strong> Left Align</strong><br/>
+    TITLE -------------------------------<br/><br/>";
+    $form['settings']['carat']['title_center']['#markup'] = "
+    <strong> Center Align</strong><br/>
+    --------------- TITLE ---------------<br/><br/>";
+
+    $form['settings']['carat']['title_right']['#markup'] = "
+    <strong> Right Align</strong><br/>
+    ------------------------------- TITLE <br/><br/>";
+
+    $form['settings']['carat']['block_class'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Custom block class'),
+      '#description' => t('Multiple classes can be separated with whitespace'),
+      '#default_value' => isset($settings) ? $settings['block_class'] : 2
+    );
+
+    $form['settings']['carat']['color'] = array(
+      '#type' => 'select',
+      '#title' => t('Background Color'),
+      '#options' => array(
+        'background-transparent' => t('Transparent'),
+        'background-white' => t('White Color'),
+        'background-primary' => t('Primary Color'),
+        'background-primary-dark' => t('Primary Dark Color'),
+      ),
+      '#default_value' => isset($settings) ? $settings['color'] : 'background-white',
+    );
+
+    $form['settings']['carat']['shadow'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Block shadow'),
+      '#default_value' => isset($settings) ? $settings['shadow'] : 1,
+    );
+
+    $form['settings']['carat']['content_only'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Apply color and shadow only on content of block'),
+      '#default_value' => isset($settings) ? $settings['content_only'] : 1,
+    );
+
+    $form['settings']['carat']['margin'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Margin from bottom'),
+      '#default_value' => isset($settings) ? $settings['margin'] : 1,
+    );
+
+    $form['settings']['carat']['padding'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Padding of block'),
+      '#description' => t('Will create padding for entire block'),
+      '#default_value' => isset($settings) ? $settings['padding'] : 1,
+    );
+
+    $form['settings']['carat']['content_padding'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Padding of block content'),
+      '#description' => t('Will create padding for block content ( title not included )'),
+      '#default_value' => isset($settings) ? $settings['content_padding'] : 1,
+    );
+
+    $form['#submit'][] = 'carat_utils_block_form_save';
+  }
+}
+
+function carat_utils_block_form_save($form, &$form_state) {
+  $values = $form_state['values'];
+  $carat_settings = $values['carat'];
+
+  $block_settings = carat_utils_block_load($form_state['values']['delta'], $form_state['values']['module']);
+  $carat_settings['delta'] = $form_state['values']['delta'];
+  $carat_settings['module'] = $form_state['values']['module'];
+
+  if($block_settings) {
+    $carat_settings['id'] = $block_settings['id'];
+    drupal_write_record('carat_block', $carat_settings, array('id'));
+  } else {
+    drupal_write_record('carat_block', $carat_settings);
+  }
+}
+
+function carat_utils_preprocess_block(&$variables) {
+
+  $block = $variables['block'];
+  $block_settings = carat_utils_block_load($block->delta, $block->module);
+
+  $variables['title_align'] = isset($block_settings['title_align']) ? $block_settings['title_align'] : 'left';
+  $variables['title_size'] = isset($block_settings['title_size']) ? $block_settings['title_size'] : '2';
+
+  if($block_settings['margin']) {
+    $variables['classes_array'][] = 'block-margin';
+  }
+
+  if($block_settings['block_class']) {
+    $variables['classes_array'][] = $block_settings['block_class'];
+  }
+
+  if($block_settings['content_only']) {
+    $variables['classes_array'][] = 'block-content-only';
+  }
+
+  if($block_settings['shadow']) {
+    $variables['classes_array'][] = 'block-shadow';
+  }
+
+  if($block_settings['padding']) {
+    $variables['classes_array'][] = 'block-padding';
+  }
+
+  if($block_settings['content_padding']) {
+    $variables['classes_array'][] = 'block-content-padding';
+  }
+
+
+  if($block_settings['color']) {
+    $variables['classes_array'][] = $block_settings['color'];
+  }
+}
+
+function carat_utils_block_load($delta, $module) {
+  $result = db_select('carat_block', 'cb')
+    ->fields('cb')
+    ->condition('delta', $delta)
+    ->condition('module', $module)
+    ->execute()->fetch();
+
+  if($result) {
+    return (array)$result;
+  }
+
+  return FALSE;
+}

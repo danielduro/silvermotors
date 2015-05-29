@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * Implements hook_schema()
+ * @return array
+ */
+function carat_utils_schema() {
+  $schema = array();
+
+  $schema['carat_block'] = array(
+    'description' => 'Carat block',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'delta' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+        'default' => '',
+      ),
+      'module' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+        'default' => 'block',
+      ),
+      'color' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+        'default' => 'background-white',
+      ),
+      'block_class' => arraY(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+        'default' => '',
+      ),
+      'title_align' => array(
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+        'default' => 'left',
+      ),
+      'title_size' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => '2',
+      ),
+      'shadow' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'content_only' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'padding' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'content_padding' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'margin' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+function carat_utils_update_7001() {
+  $schema = carat_utils_schema();
+  foreach ($schema as $table_name => $table) {
+    if (!db_table_exists($table_name)) {
+      db_create_table($table_name, $table);
+    }
+  }
+}
+
+/**
+ * Add title align column
+ */
+function carat_utils_update_7002() {
+  if(!db_field_exists('carat_block', 'title_align')) {
+    db_add_field('carat_block', 'title_align', array(
+      'type' => 'varchar',
+      'not null' => TRUE,
+      'length' => 255,
+      'default' => 'left',
+    ));
+  }
+}
+
+/**
+ * Add title size column
+ */
+function carat_utils_update_7003() {
+  if(!db_field_exists('carat_block', 'title_size')) {
+    db_add_field('carat_block', 'title_size', array(
+      'type' => 'int',
+      'size' => 'tiny',
+      'not null' => TRUE,
+      'default' => '2',
+    ));
+  }
+}
+
+/**
+ * Add block class column
+ */
+function carat_utils_update_7004() {
+  if(!db_field_exists('carat_block', 'block_class')) {
+    db_add_field('carat_block', 'block_class', array(
+      'type' => 'varchar',
+      'not null' => TRUE,
+      'length' => 255,
+      'default' => '',
+    ));
+  }
+}

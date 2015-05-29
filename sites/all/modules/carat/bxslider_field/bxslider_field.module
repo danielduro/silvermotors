@@ -1,0 +1,102 @@
+<?php
+
+require_once 'bxslider_field.field.inc';
+
+/**
+ * Implements hook_libraries_info()
+ */
+function bxslider_field_libraries_info() {
+  $libraries['bxslider'] = array(
+    'name' => 'bxSlider Library',
+    'vendor url' => 'http://bxslider.com',
+    'download url' => 'http://bxslider.com/lib/jquery.bxslider.zip',
+    'files' => array(
+      // 'js' and 'css' follow the syntax of hook_library(), but file paths are
+      // relative to the library path.
+      'js' => array(
+        'jquery.bxslider.js',
+      ),
+      'css' => array(
+        'jquery.bxslider.css',
+      ),
+    ),
+  );
+
+  return  $libraries;
+}
+
+
+/**
+ * Implements hook_theme()
+ * @return array
+ */
+function bxslider_field_theme() {
+  return array(
+    'bxslider_field_gallery' => array(
+      'template' => 'bxslider-field-gallery',
+      'variables' => array('items', 'settings', 'entity_type', 'entity')
+    ),
+  );
+}
+
+/**
+ * @param $variables
+ */
+function template_preprocess_bxslider_field_gallery(&$variables) {
+  $entity = $variables['entity'];
+  $entity_type = $variables['entity_type'];
+  $entity_id = entity_id($entity_type, $entity);
+
+  $items = $variables['items'];
+  $settings = $variables['settings'];
+
+  // @todo push settings
+  drupal_add_library('bxslider_field', 'bxslider');
+  drupal_add_js(array('bxslider_field' => array($entity_id => $settings)), 'setting');
+  drupal_add_js(drupal_get_path('module', 'bxslider_field') . '/bxslider_field.js', 'file');
+
+  $images = array();
+
+  foreach($items as $index => $item) {
+    $images['slide'][$index] = _bxslider_field_image_styled($item,$settings['image_style']);
+    $images['page'][$index] = _bxslider_field_image_styled($item, $settings['image_pager_style']);
+  }
+
+  $variables['slides'] = $images['slide'];
+  $variables['pager'] = $images['page'];
+  $variables['entity_id'] = $entity_id;
+}
+
+/**
+ * Helper function for styling images
+ * @param $image
+ * @param null $style
+ * @return string
+ */
+function _bxslider_field_image_styled($image, $style = NULL) {
+  if(!$image) {
+    return FALSE;
+  }
+  if($style) {
+    return theme_image_style(
+      array(
+        'style_name' => $style,
+        'path' => $image['uri'],
+        'width' => NULL,
+        'height' => NULL,
+        'alt' => !empty($image['alt']) ? $image['alt'] : '',
+        'attributes' => array(),
+      )
+    );
+  }
+
+  return theme_image(
+    array(
+      'path' => $image['uri'],
+      'width' => NULL,
+      'height' => NULL,
+      'alt' => !empty($image['alt']) ? $image['alt'] : '',
+      'attributes' => array(),
+    )
+  );
+}

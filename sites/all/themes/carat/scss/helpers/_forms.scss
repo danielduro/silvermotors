@@ -1,0 +1,226 @@
+textarea, input, button {
+  -webkit-font-smoothing: antialiased;
+}
+
+input[type=checkbox], input[type=radio] {
+  cursor: pointer;
+}
+
+form {
+  .form-required {
+    color: red;
+  }
+  label {
+    cursor: pointer;
+  }
+}
+
+.bef-select-as-checkboxes.form-control {
+  border-width: 0px;
+  @include box-shadow(none);
+  padding: 0px;
+}
+
+.form-type-bef-checkbox,
+.checkbox {
+  padding-left: 0px;
+  font-size: 14px;
+  line-height: 28px;
+  .ez-checkbox {
+    @include box-shadow(inset 0px 1px 1px rgba(0, 0, 0, 0.1));
+    background-color: $color-gray;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer !important;
+    display: inline-block;
+    margin: 4px 10px -5px 0px;
+    height: 20px;
+    width: 20px;
+    &.ez-checked {
+      background-image: url(../img/checkbox-checked.png);
+    }
+    .ez-hide {
+      opacity: 0;
+      width: 20px;
+      height: 20px;
+      margin: 0px;
+      margin: 0px !important;
+    }
+  }
+}
+
+.form-control {
+  @include transition(background-color 0.2s);
+  border-radius: 0px;
+  background-color: #fff;
+  border: 1px solid darken($color-gray, 10%);
+  height: auto;
+  width: 100%;
+  &:focus {
+    background-color: #fff;
+    box-shadow: none;
+    border-color: darken($color-gray, 10%);
+  }
+
+  &.chosen-container {
+    box-shadow: none !important;
+    border-width: 0px;
+    padding: 0px;
+  }
+}
+
+.chosen-container-single {
+  position: relative;
+  width: 100% !important;
+  &.chosen-container-active {
+    .chosen-single {
+      @include box-shadow(none);
+      background-image: none;
+      border: 1px solid darken($color-gray, 10%);
+    }
+  }
+
+  .chosen-single {
+    @include box-shadow(none);
+    background-image: none;
+    background-color: $color-gray-light;
+    border: 1px solid darken($color-gray, 10%);
+    border-radius: 0px;
+    height: auto !important;
+    padding: 8px 8px;
+    div {
+      &:after {
+        @include transform(rotate(90deg));
+        color: $color-black;
+        content: '\e641';
+        display: inline-block;
+        font-family: 'PictoPro-Normal';
+        font-size: 16px;
+        position: absolute;
+        right: 10px;
+        top: 8px;
+      }
+      b {
+        background-position: 0px 11px;
+        display: none;
+      }
+    }
+  }
+
+  .chosen-drop {
+    @include box-shadow(none);
+    border-radius: 0px;
+    border: 1px solid darken($color-gray, 10%);
+    .chosen-search {
+      input {
+        @include box-shadow(none);
+        background-image: none;
+        border: 1px solid $color-gray-dark;
+        padding: 7px 10px;
+      }
+    }
+
+    .chosen-results {
+      .active-result {
+        &.highlighted, &.result-selected {
+          @include box-shadow(none);
+          background-color: $color-primary;
+          background-image: none;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.views-exposed-form {
+  .views-exposed-widget {
+    margin-right: 0px;
+    padding: 0px;
+  }
+  .form-submit {
+    margin-top: 0px !important;
+  }
+}
+
+.views-exposed-widget,
+.input-group {
+  .btn {
+    background-color: $color-secondary;
+    border-radius: 0px;
+    border: 0px;
+    color: #fff;
+    padding: 7px 12px;
+  }
+}
+
+.btn {
+  &:active, &:focus {
+    @include box-shadow(none);
+    outline: 0px;
+  }
+}
+
+.btn-small {
+  font-size: 12px;
+}
+
+.btn-default {
+  @include transition(background-color 0.5s);
+  width: 100%;
+  border-radius: 0px;
+  padding: 10px;
+  background-color: $color-secondary;
+  border-width: 0px;
+  &:focus, &:active, &:hover {
+    background-color: darken($color-secondary, 10%);
+  }
+}
+
+.views-exposed-form {
+  .views-exposed-widget .views-submit-button {
+    margin-bottom: 0px;
+  }
+}
+
+#block-views-exp-cars-filter-page {
+  #edit-field-year-value-wrapper {
+    .form-type-date-text {
+      margin-right: 0px;
+    }
+    #edit-field-year-value-min-wrapper {
+      float: left;
+      width: 45%;
+      label {
+        display: none;
+      }
+    }
+    #edit-field-year-value-max-wrapper {
+      float: right;
+      width: 45%;
+      label {
+        display: none;
+      }
+    }
+    .date-date {
+      width: 100%;
+    }
+  }
+  .views-exposed-widget {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
+
+.btn-primary {
+  @include transition(background color 0.5s);
+  background-color: $color-secondary;
+  border-width: 0px;
+  font-weight: 900;
+  font-size: 14px;
+  margin-top: 0px;
+  text-align: center;
+  width: 100%;
+  &:hover {
+    background-color: darken($color-secondary, 10%);
+  }
+}

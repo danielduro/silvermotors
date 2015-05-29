@@ -1,0 +1,126 @@
+.node-car-grid {
+  h3 {
+    font-weight: bold;
+    text-align: center;
+    a {
+      color: $color-primary-lighter;
+      &:hover {
+        color: darken($color-primary-lighter, 10%);
+        text-decoration: none;
+      }
+    }
+  }
+
+  .inner {
+    border: 1px solid rgba(0, 0, 0, .1);
+    .field-type-image {
+      overflow: hidden;
+      margin-left: -2px;
+      margin-right: -2px;
+      margin-top: -1px;
+      padding: 0px 1px;
+      position: relative;
+      &:hover {
+        .cycle-pager {
+          margin-top: -24px;
+        }
+      }
+
+      a {
+        width: 100%;
+        overflow: hidden;
+        img {
+          @include transition(all 0.2s);
+          width: 100%;
+          height: auto;
+          &:hover {
+            @include transform(scale(1.15));
+          }
+        }
+      }
+    }
+
+    .like {
+      @include box-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+      background-color: #fff;
+      padding: 10px;
+      color: $color-secondary;
+      position: absolute;
+      top: 10px;
+      left: 24px;
+      z-index: 101;
+      a {
+        @include transition(all .2s linear);
+        display: block;
+        text-decoration: none;
+        &:hover {
+          @include transform(rotate(15deg));
+        }
+      }
+    }
+
+    .field-name-field-subtitle {
+      color: rgba(0, 0, 0, .6);
+      text-align: center;
+      font-size: 12px;
+    }
+    .field-name-field-price {
+      color: $color-secondary;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .meta {
+      border-top: 1px solid rgba(0, 0, 0, .1);
+      padding: 10px;
+      ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        width: 100%;
+        li {
+          display: block;
+          float: left;
+          width: 33%;
+          line-height: 25px;
+          i {
+            float: left;
+            vertical-align: -6px;
+            margin-right: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------------
+//  Block overrides
+// ---------------------------------------------------------------------------------
+#recent-cars {
+  padding-bottom: 20px;
+}
+
+.block {
+  .grid-carousel {
+    margin-left: -15px;
+    margin-right: -15px;
+    .bxslider-views-slideshow-main-frame-row {
+      width: 282px !important;
+      @media (max-width: 768px) {
+        width: 250px !important;
+      }
+    }
+    .node-car-grid {
+      padding: 15px;
+
+    }
+    .inner-block {
+      padding: 15px;
+      float: left;
+      width: 100%;
+    }
+  }
+}

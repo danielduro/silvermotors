@@ -1,0 +1,33 @@
+/** Formatted meta information for articles ( date / author / comments .. ) **/
+@mixin article-row-meta($color: rgba(0, 0, 0, 0.6)) {
+  border-top-width: 0px;
+  font-size: 11px;
+  padding: 0px;
+  ul {
+    list-style: none;
+    padding: 0px;
+    width: 100%;
+    li {
+      background-color: transparent;
+      color: $color;
+      line-height: 24px;
+      margin-right: 10px;
+      padding: 0px;
+      .icon {
+        font-size: 18px;
+        margin-right: 5px;
+        vertical-align: -4px;
+      }
+      &.read-more {
+        float: right;
+        a {
+          padding: 5px;
+          font-size: 12px;
+          .icon {
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+  }
+}

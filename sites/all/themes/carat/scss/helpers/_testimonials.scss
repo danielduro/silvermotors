@@ -1,0 +1,37 @@
+.testimonial-grid-item {
+  @include box-shadow(0px 1px 1px rgba(0, 0, 0, 0.2));
+  margin-bottom: 20px;
+  position: relative;
+  .inner {
+    padding: 15px;
+  }
+  .field-type-image {
+    overflow: hidden;
+    img {
+      @include transition(all 0.2s);
+      width: 100%;
+      height: auto;
+      &:hover {
+        @include transform(scale(1.15));
+      }
+    }
+  }
+  .field-name-body {
+    color: #868686;
+    display: block;
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 10px;
+  }
+  .field-type-fivestar {
+    display: block;
+    padding: 15px 0px 10px 0px;
+    .star {
+      margin-right: 5px;
+    }
+  }
+  .author {
+    display: block;
+  }
+}
+

@@ -1,0 +1,101 @@
+/** Basic Article Row styling - various row displays should extend this **/
+.article-row {
+  h3, h4 {
+    a {
+      color: $color-primary;
+    }
+  }
+  .field-name-field-image {
+    overflow: hidden;
+    img {
+      @include transition(all 0.2s);
+      width: 100%;
+      height: auto;
+      &:hover {
+        @include transform(scale(1.15));
+      }
+    }
+  }
+
+    .field-name-field-category {
+    color: $color-secondary;
+    margin-bottom: 10px;
+  }
+  p {
+    @include opacity(.6);
+    color: $color-black;
+  }
+}
+
+
+// ---------------------------------------------------------------------------------
+//  Article Display Styles
+//
+//  1. node-article-row - default row
+//  2. node-article-row-sidebar - article displayed in sidebars
+//  3. node-article-row-footer - article displayed in footer
+// ---------------------------------------------------------------------------------
+
+.node-article-row {
+  @extend .article-row;
+  margin-bottom: 15px !important;
+  .inner {
+    border: 1px solid rgba(0, 0, 0, .1);
+  }
+  @media (max-width: 768px) {
+    .content {
+      padding: 10px;
+    }
+  }
+}
+
+.node-article-row-sidebar {
+  @extend .article-row;
+}
+
+.node-article-row-footer {
+  margin-bottom: 10px;
+  @extend .article-row;
+  h3, h4 {
+    margin-top: 0px;
+    a {
+      color: $color-secondary; font-weight: bold;
+    }
+    &:hover {
+      color: darken($color-secondary, 10%);
+    }
+  }
+
+  p {
+    @include opacity(.6);
+    color: #fff;
+    line-height: 1.3em;
+  }
+}
+
+// ---------------------------------------------------------------------------------
+//  Block overrides
+// ---------------------------------------------------------------------------------
+#block-views-article-sidebar-lates-reviews {
+  .node-article-row-sidebar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  .view-content {
+    > .row {
+      > div {
+        > .row {
+          &:last-child {
+            .node-article-row-sidebar {
+              border-bottom-width: 0px;
+              margin-bottom: 0px;
+              padding-bottom: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

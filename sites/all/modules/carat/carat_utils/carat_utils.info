@@ -1,0 +1,4 @@
+name = Carat utils
+description = Contains utility functions or blocks designed for carat
+core = 7.x
+package = Carat

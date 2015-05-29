@@ -1,0 +1,152 @@
+#footer {
+  background-color: $color-primary-darker;
+  color: #ffffff;
+  padding-bottom: 30px;
+  .block {
+    margin-bottom: 30px;
+    hr {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+    .block-header {
+      h2 {
+        font-size: 24px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+      .line {
+        display: none;
+      }
+    }
+
+    &.random-cars {
+      .teaser-item {
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        &:last-child {
+          border: 0px;
+        }
+
+        .picture {
+          margin-bottom: 10px;
+          position: relative;
+          .hover {
+            @include transition(margin-top .2s linear);
+            background-color: rgba(0, 0, 0, .2);
+            height: 100%;
+            left: 0px;
+            margin-top: -100%;
+            position: absolute;
+            right: 0px;
+            text-align: center;
+            .hover-inner {
+              bottom: 0;
+              height: 20px;
+              left: 0;
+              margin: auto;
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 20px;
+              .icon {
+                color: #fff;
+                display: block;
+                font-size: 36px;
+                margin-left: -8px;
+                margin-top: -8px;
+              }
+            }
+          }
+
+          &:hover {
+            .hover {
+              margin-top: 0%;
+            }
+          }
+        }
+
+        .price {
+          color: #fff;
+        }
+        .title {
+          a {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 0px;
+          }
+        }
+        p {
+          line-height: 16px;
+        }
+      }
+    }
+
+    .opening-hours {
+      .day {
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        line-height: 30px;
+        &:last-child {
+          border-bottom: 0px;
+        }
+        .name {
+          float: left;
+          font-weight: bold;
+        }
+        .hours {
+          float: right;
+          i {
+            font-size: 18px;
+            font-weight: normal;
+            vertical-align: -4px;
+          }
+        }
+      }
+    }
+  }
+
+  #footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    padding-bottom: 15px;
+    padding-top: 15px;
+    .separator {
+      @include opacity(.6);
+      padding: 0px 8px;
+    }
+    .copyright {
+      float: left;
+      @media (max-width: 767px) {
+        float: none;
+        text-align: center;
+      }
+    }
+
+    .nav.nav-pills {
+      float: right;
+      li {
+        margin-left: 20px;
+        a {
+          color: #fff;
+          padding: 0px;
+          &:hover {
+            background-color: transparent;
+            text-decoration: underline;
+          }
+        }
+      }
+
+      @media (max-width: 767px) {
+        float: none;
+        margin: 20px 0px 0px 0px;
+        li {
+          border-top: 1px solid rgba(255, 255, 255, .1);
+          float: none;
+          line-height: 30px;
+          margin: 0px;
+        }
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+      margin-top: 30px;
+    }
+  }
+}

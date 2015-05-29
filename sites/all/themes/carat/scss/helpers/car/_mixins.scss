@@ -1,0 +1,83 @@
+/** Formatted meta information for articles ( fuel / mileage .. ) **/
+@mixin car-row-meta() {
+  ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    width: 100%;
+    li {
+      display: inline-block;
+      padding: 3px 6px;
+      margin-right: 2px;
+      background-color: $color-gray;
+      i {
+        float: left;
+        vertical-align: -6px;
+      }
+      > div {
+        float: left;
+        line-height: 25px;
+      }
+    }
+  }
+}
+
+/** Basic row formatting **/
+@mixin car-row($title-color: $color-primary-lighter, $color: rgba(0, 0, 0, 0.6)) {
+  margin-bottom: 15px !important;
+  padding: 0px;
+  h2, h3, h4 {
+    color: $title-color;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    a {
+      color: $title-color;
+      text-decoration: none;
+      &:hover {
+        color: darken($title-color, 10%);
+      }
+    }
+  }
+  .inner {
+    border: 1px solid rgba(0, 0, 0, .1);
+  }
+  .field-name-body {
+    margin-bottom: 10px;
+  }
+  .field-type-image {
+    margin: -1px 0px -1px -1px;
+    padding: 0px;
+    overflow: hidden;
+    a {
+      width: 100%;
+      overflow: hidden;
+      img {
+        @include transition(all 0.2s);
+        width: 100%;
+        height: auto;
+        &:hover {
+          @include transform(scale(1.15));
+        }
+      }
+    }
+  }
+  .field-name-field-subtitle {
+    color: $color;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .field-name-field-price {
+    color: $color-secondary;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  p {
+    @include opacity(.6);
+  }
+
+  @media (max-width: 768px) {
+    .content { padding: 10px; }
+  }
+}

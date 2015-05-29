@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * Implements hook_views_api().
+ */
+function carat_magazine_slider_views_api() {
+  return array(
+    'api' => 3.0,
+  );
+}
+
+/**
+ * Implements hook_theme()
+ * @return array
+ */
+function carat_magazine_slider_theme() {
+  return array(
+    'carat_magazine_slider_view' => array(
+      'variables' => array('form' => NULL),
+      'template' => 'carat-slider-view',
+    )
+  );
+}
+
+/**
+ * @param $variables
+ */
+function template_preprocess_carat_magazine_slider_view(&$variables) {
+  // Map markers
+
+  $view = $variables['view'];
+  $result = $variables['rows'];
+
+  // settings
+  $options = $view->style_plugin->options;
+  // style handler
+  $handler = $view->style_plugin;
+
+  // rendered fields for each result row - we are getting higher level of granularity here
+  $field_renders = $handler->render_fields($result);
+  $records = array();
+
+
+  foreach($field_renders as $id => $field_render) {
+    // our special little image fields
+    if(isset($field_render[$options['image_field']])) {
+      $records[$id]['image'] = $field_render[$options['image_field']];
+    }
+    // grouping pager fields
+    foreach($options['pager_fields'] as $field_name => $pager_field) {
+      $records[$id]['pager'][$field_name] = $field_render[$field_name];
+    }
+
+
+    // grouping content fields
+    foreach($options['content_fields'] as $field_name => $content_field) {
+      $records[$id]['content'][$field_name] = $field_render[$field_name];
+    }
+  }
+
+  $variables['records'] = $records;
+}
+
+

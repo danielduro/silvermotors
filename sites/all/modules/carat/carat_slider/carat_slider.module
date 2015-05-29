@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * Implements hook_views_api().
+ */
+function carat_slider_views_api() {
+  return array(
+    'api' => 3.0,
+  );
+}
+
+/**
+ * Implements hook_theme()
+ * @return array
+ */
+function carat_slider_theme() {
+  return array(
+    'carat_slider_view' => array(
+      'variables' => array('form' => NULL),
+      'template' => 'carat-slider-view',
+    )
+  );
+}
+
+/**
+ * @param $variables
+ */
+function template_preprocess_carat_slider_view(&$variables) {
+  // Map markers
+  $markers = array();
+  $view = $variables['view'];
+  $result = $variables['rows'];
+
+  // settings
+  $options = $view->style_plugin->options;
+  // style handler
+  $handler = $view->style_plugin;
+
+  // rendered fields for each result row - we are getting higher level of granularity here
+  $field_renders = $handler->render_fields($result);
+
+
+  $records = array();
+
+
+  foreach($field_renders as $id => $field_render) {
+
+    if(isset($field_render[$options['image_field']])) {
+      $records['image'][$id] = $field_render[$options['image_field']];
+      unset($field_render[$options['image_field']]);
+    }
+
+    if(isset($field_render[$options['title_field']])) {
+      $records['overview'][$id]['title'] = $field_render[$options['title_field']];
+      unset($field_render[$options['title_field']]);
+    }
+
+    if(isset($field_render[$options['subtitle_field']])) {
+      $records['overview'][$id]['subtitle'] = $field_render[$options['subtitle_field']];
+      unset($field_render[$options['subtitle_field']]);
+    }
+
+    if(isset($field_render[$options['price_field']])) {
+      $records['overview'][$id]['price'] = $field_render[$options['price_field']];
+      unset($field_render[$options['price_field']]);
+    }
+
+
+    foreach($field_render as $field_name => $field_content) {
+      if(isset($view->field[$field_name]->options['label'])) {
+        $records['overview'][$id]['fields'][$field_name]['label'] = $view->field[$field_name]->options['label'];
+      }
+
+      $records['overview'][$id]['fields'][$field_name]['content'] = $field_content;
+    }
+
+
+  }
+
+  $variables['records'] = $records;
+}
+
+

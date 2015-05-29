@@ -1,0 +1,4 @@
+name = Image single
+description = Formatter for images to display only first image
+core = 7.x
+package = PragmaticMates

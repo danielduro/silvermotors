@@ -1,0 +1,117 @@
+.page-contact {
+  #highlighted {
+    padding: 0px !important;
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+  #contact-map {
+    height: 360px;
+    width: 100%;
+  }
+  .heading {
+    .title {
+      h1 {
+        margin-top: 30px;
+      }
+    }
+  }
+  .block {
+    &.about {
+      display: inline-block;
+      font-size: 12px;
+      line-height: 20px;
+      min-height: 245px;
+      position: relative;
+      .social {
+        margin: 15px 0px;
+        width: 100%;
+        ul {
+          float: none;
+          padding: 0px;
+          text-align: center;
+          li {
+            float: none;
+            display: inline-block;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    &.contact {
+      min-height: 245px;
+      .icon {
+        font-size: 18px;
+        margin-right: 10px;
+      }
+      p {
+        margin: 10px 0px 15px 0px;
+        &.address {
+          i {
+            margin-top: -38px;
+          }
+          i, span {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    &.opening {
+      min-height: 245px;
+    }
+
+    .block-title {
+      h3 {
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+        padding-bottom: 10px;
+        margin-top: 0px;
+      }
+    }
+    .opening-hours {
+      .day {
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+        line-height: 30px;
+        &:last-child {
+          border-bottom: 0px;
+        }
+        .name {
+          float: left;
+          font-weight: bold;
+        }
+        .hours {
+          float: right;
+          i {
+            font-size: 18px;
+            font-weight: normal;
+            vertical-align: -4px;
+          }
+        }
+      }
+    }
+  }
+  .textarea {
+    margin-top: 30px;
+    textarea {
+      width: 100%;
+      height: 220px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 990px) {
+    .block {
+      &.contact,
+      &.about,
+      &.opening {
+        min-height: 300px;
+      }
+    }
+  }
+}
+
+.webform-client-form {
+  #webform-component-message {
+    margin-bottom: 15px;
+  }
+}

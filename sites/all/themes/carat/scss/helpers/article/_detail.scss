@@ -1,0 +1,148 @@
+article {
+  display: inline-block;
+  // title
+  h1 {
+    color: $color-primary;
+    margin-top: 0px;
+    a {
+      @include transition(color 0.2s);
+      color: $color-primary;
+      &:hover {
+        color: $color-primary-darker;
+        text-decoration: none;
+      }
+    }
+  }
+  // content
+  p {
+    @include opacity(.6);
+    line-height: 22px;
+  }
+  .block-inner {
+    padding: 15px;
+  }
+  .field-name-field-image {
+    max-height: 450px;
+    overflow: hidden;
+    img {
+      @include transition(all 0.2s);
+      width: 100%;
+      height: auto;
+      &:hover {
+        @include transform(scale(1.15));
+      }
+    }
+  }
+
+  .field-name-field-category {
+    margin-bottom: 10px;
+  }
+  .meta {
+    @include article-row-meta();
+  }
+}
+
+/** Article Comments **/
+#comments {
+  .indented {
+    padding-left: 30px;
+  }
+  .btn-primary {
+    width: auto;
+  }
+  .comment {
+    &:last-child {
+      .block {
+        margin-bottom: 0px;
+      }
+    }
+    .content-inner {
+      padding: 0px;
+      @media (max-width: 768px) {
+        padding: 10px 0px;
+      }
+    }
+
+    .block-title {
+      display: inline-block;
+      margin-top: 0px;
+      margin-bottom: 5px;
+      width: 100%;
+      h3 {
+        color: $color-primary;
+        float: left;
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+      .links {
+        float: right;
+      }
+    }
+    .content {
+      p {
+        @include opacity(.6);
+        line-height: 22px;
+        margin: 0px;
+      }
+    }
+    .meta {
+      ul {
+        padding: 0px;
+        list-style: none;
+        .icon {
+          color: rgba(0, 0, 0, 0.6);
+          font-size: 18px;
+          margin-right: 5px;
+          vertical-align: -4px;
+        }
+      }
+    }
+    .picture {
+      overflow: hidden;
+      img {
+        border-radius: 50%;
+        width: 100%;
+      }
+      @media (max-width: 768px) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+#comment-form {
+  .filter-wrapper {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
+}
+
+.article-category {
+  ul {
+    @include category-listing();
+    width: 100%;
+  }
+}
+
+ul.archive {
+  padding: 0px;
+  li {
+    line-height: 28px;
+    list-style: none;
+    a {
+      color: #363636;
+      font-size: 14px;
+    }
+    span.dot {
+      background-color: $color-secondary;
+      border-radius: 50%;
+      display: block;
+      float: left;
+      width: 6px;
+      height: 6px;
+      margin: 10px 14px 0px 0px;
+    }
+  }
+}

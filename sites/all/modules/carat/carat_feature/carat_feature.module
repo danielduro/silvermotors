@@ -1,0 +1,30 @@
+<?php
+
+
+/**
+ * Implements hook_entity_info_alter()
+ * @param $info
+ */
+function carat_feature_entity_info_alter(&$info) {
+
+  $info['node']['view modes']['row'] = array(
+    'label' => t('Row'),
+    'custom settings' => FALSE,
+  );
+
+  $info['node']['view modes']['grid'] = array(
+    'label' => t('Grid'),
+    'custom settings' => FALSE,
+  );
+
+  $info['node']['view modes']['row-sidebar'] = array(
+    'label' => t('Row Sidebar'),
+    'custom settings' => FALSE,
+  );
+
+  $info['node']['view modes']['row-footer'] = array(
+    'label' => t('Row Footer'),
+    'custom settings' => FALSE,
+  );
+}
+

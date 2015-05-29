@@ -1,0 +1,284 @@
+.node-car-full {
+  margin-bottom: 20px;
+  .heading {
+    margin: 20px 0px;
+    .subtitle {
+      color: #404040;
+    }
+  }
+
+  // content
+  .field-name-field-video-iframe {
+    position: relative;
+    height: 0;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    overflow: hidden;
+    iframe, object, embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // set up map size
+  .google_map_field_display {
+    height: 253px;
+    width: 100%;
+  }
+
+  // Overview tab
+  .group-overview {
+    display: inline-block;
+    font-size: 13px;
+    width: 100%;
+    .producer-logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .field-name-body {
+      border-top: 1px solid $color-gray;
+      display: block;
+      font-size: 12px;
+      float: left;
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      p {
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 0px;
+      }
+    }
+    .group-overview-price{
+      float: left;
+      margin-bottom: 20px;
+      width: 40%;
+      .field-label {
+        color: #797979;
+        font-size: 14px;
+        font-weight: bold;
+        padding-left: 0px;
+        padding-bottom: 0px;
+      }
+      .field-name-field-price {
+        margin-bottom: 20px;
+        .field-item {
+          color: $color-secondary;
+          font-weight: bold;
+          font-size: 30px;
+        }
+      }
+      .field-name-field-finance-price {
+        .field-item {
+          color: $color-primary;
+          font-weight: bold;
+          font-size: 30px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+        .field-name-field-finance-price {
+          float: right;
+          .field-item {
+            font-size: 18px;
+          }
+        }
+        .field-name-field-price {
+          float: left;
+          .field-item {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    .group-overview-table {
+      float: right;
+      width: 55%;
+      .field {
+        border-bottom: 1px dotted #d9d9d9;
+        float: left;
+        padding: 8px 0px;
+        width: 100%;
+        &:last-child {
+          border-bottom-width: 0px;
+        }
+        .label {
+          font-weight: bold;
+          float: left;
+        }
+        .field-items {
+          color: rgba(0, 0, 0, 0.6);
+          float: right;
+        }
+      }
+
+      @media (max-width: 768px)  {
+        width: 100%;
+      }
+    }
+  }
+
+  // Appliances tab
+  .group-appliances {
+    ul.appliances {
+      padding: 0px;
+      li {
+        line-height: 28px;
+        list-style: none;
+        span.dot {
+          background-color: $color-secondary;
+          border-radius: 50%;
+          display: block;
+          float: left;
+          height: 6px;
+          margin: 10px 14px 0px 0px;
+          width: 6px;
+        }
+      }
+    }
+  }
+}
+
+/** Styling of tab buttons **/
+.field-group-htabs {
+  .horizontal-tabs {
+    border-width: 0px;
+    margin-bottom: 30px;
+    .field-group-htab {
+      @include box-shadow(0px 1px 1px rgba(0, 0, 0, 0.2));
+      border-radius: 0px;
+      margin-bottom: 0px;
+      float: left;
+      width: 100%;
+    }
+    .field-group-htab {
+      min-height: 440px;
+    }
+    .horizontal-tabs-list {
+      background-color: transparent;
+      border-width: 0px;
+      float: left;
+      .horizontal-tab-button {
+        border-radius: 0px;
+        border-width: 0px;
+        font-size: 18px;
+        text-align: center;
+        margin-right: 3px;
+        width: 30%;
+        a {
+          border-radius: 0px;
+          border-width: 0px;
+          background-color: #ececec;
+          color: #727272;
+        }
+        @media (max-width: 768px) {
+          width: 31%;
+          font-size: 13px;
+        }
+        &.selected {
+          a {
+            color: $color-secondary;
+            border-width: 0px;
+            background-color: #ffffff;
+            &:hover {
+              border-width: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/** Styling of gallery formatter **/
+.bxslider-field-gallery-wrapper {
+  margin-bottom: 30px;
+  .bx-viewport {
+    border-width: 0px;
+  }
+  .bxslider-field-gallery {
+    width: 100% !important;
+    .picture-wrapper {
+      display: inline-block;
+      max-height: 379px;
+      overflow: hidden;
+      width: 100% !important;
+      img {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+      }
+    }
+  }
+  .bx-wrapper {
+    margin-bottom: 0px;
+  }
+  .bx-pager {
+    background-color: #fff;
+    color: $color-secondary;
+    padding: 15px;
+    position: relative;
+    width: 100%;
+    .bx-page {
+      cursor: pointer;
+      display: inline-block;
+      padding: 0px 3px;
+      img {
+        @include transition(opacity 0.2s);
+        opacity: 0.6;
+        width: auto;
+      }
+      &:hover, &.active {
+        img {
+          opacity: 1;
+        }
+      }
+      @media(max-width: 768px) {
+        margin-bottom: 10px;
+      }
+    }
+
+    .prev {
+      display: block;
+      font-size: 24px;
+      height: 24px;
+      left: 5px;
+      position: absolute;
+      top: 40%;
+      width: 24px;
+      i {
+        position: absolute;
+      }
+      a {
+        display: block;
+        height: 24px;
+        position: absolute;
+        width: 24px;
+        z-index: 10;
+      }
+    }
+    .next {
+      display: block;
+      font-size: 24px;
+      height: 24px;
+      position: absolute;
+      right: 5px;
+      top: 40%;
+      width: 24px;
+      i {
+        position: absolute;
+      }
+      a {
+        display: block;
+        height: 24px;
+        position: absolute;
+        width: 24px;
+        z-index: 10;
+      }
+    }
+  }
+}

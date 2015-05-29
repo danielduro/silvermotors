@@ -1,0 +1,45 @@
+.page-404 {
+  .heading {
+    .title {
+      h1 {
+        margin-top: 30px;
+      }
+    }
+  }
+  .not-found {
+    padding: 40px 0px;
+    .not-found-icon {
+      @include transition(background-color .2s linear);
+      background-color: $color-secondary;
+      border-radius: 50%;
+      font-size: 72px;
+      line-height: 150px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      width: 150px;
+      height: 150px;
+      margin-left: auto;
+      margin-right: auto;
+      .not-found-icon-normal {
+        @include transition(bottom .2s linear);
+        text-align: center;
+        color: #fff;
+      }
+    }
+
+    .title {
+      h2 {
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .subtitle {
+      h3 {
+        text-align: center;
+      }
+    }
+  }
+}
+
+

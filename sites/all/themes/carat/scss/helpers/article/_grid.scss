@@ -1,0 +1,39 @@
+/** Basic Article Grid styling - various grid displays should extend this **/
+.node-article-grid {
+  .inner {
+    .field-name-field-image {
+      overflow: hidden;
+      img {
+        @include transition(all 0.2s);
+        width: 100%;
+        height: auto;
+        &:hover {
+          @include transform(scale(1.15));
+        }
+      }
+
+    }
+    .inner-content {
+      padding: 10px;
+      p {
+        @include opacity(.6);
+        color: $color-black;
+      }
+      h3 {
+        text-align: left;
+        margin-top: 0px;
+        a {
+          color: $color-primary-lighter;
+        }
+      }
+      .field-name-field-category {
+        color: $color-secondary;
+        margin-bottom: 10px;
+      }
+      .meta {
+        @include article-row-meta();
+      }
+    }
+  }
+}
+

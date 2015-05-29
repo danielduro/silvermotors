@@ -1,0 +1,10 @@
+<?php
+
+
+function carat_testimonial_fivestar_widgets() {
+  $widgets = array(
+    drupal_get_path('module', 'carat_testimonial') . '/stars/carat-stars.css' => 'Carat stars',
+  );
+
+  return $widgets;
+}

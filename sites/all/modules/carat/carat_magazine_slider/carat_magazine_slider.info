@@ -1,0 +1,4 @@
+name = Carat Magazine Slider
+description = Implementation of Carat-Specific Magazine slider
+core = 7.x
+package = Carat

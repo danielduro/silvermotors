@@ -1,0 +1,4 @@
+name = Carat testimonial
+description = Carat additional definitions and features for Testimonial content type
+core = 7.x
+package = Carat

@@ -1,0 +1,63 @@
+/** Styling of Video Block **/
+.video-reviews {
+  .grid-item {
+    background-color: transparent !important;
+    display: inline-block;
+    text-decoration: none;
+    .picture {
+      .icon {
+        font-size: 90px;
+        left: 0px;
+        margin-top: -70px;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        width: 100%;
+      }
+      img {
+        height: auto;
+        width: 100%;
+      }
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  a {
+    .title {
+      h3 {
+        color: #ffffff;
+        font-family: 'Arial', sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 3px;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .meta {
+    color: rgba(255, 255, 255, 0.6);
+    .icon {
+      font-size: 18px;
+      margin-right: 5px;
+      vertical-align: -5px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .video {
+      .icon {
+        top: 10px;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .grid-item {
+      margin-bottom: 20px;
+    }
+  }
+}
+

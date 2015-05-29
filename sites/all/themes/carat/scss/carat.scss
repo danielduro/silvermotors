@@ -1,0 +1,246 @@
+@import 'compass/css3';
+
+@import 'helpers/variables';
+@import 'helpers/mixins';
+@import 'helpers/header';
+@import 'helpers/forms';
+@import 'helpers/slider';
+
+@import 'helpers/car/mixins';
+@import 'helpers/car/grid';
+@import 'helpers/car/row';
+@import 'helpers/car/detail';
+
+@import 'helpers/article/mixins';
+@import 'helpers/article/video';
+@import 'helpers/article/grid';
+@import 'helpers/article/row';
+@import 'helpers/article/detail';
+
+@import 'helpers/carousel';
+@import 'helpers/filter';
+@import 'helpers/testimonials';
+@import 'helpers/features';
+@import 'helpers/partners';
+@import 'helpers/footer';
+@import 'helpers/magazine';
+@import 'helpers/faq';
+@import 'helpers/404';
+@import 'helpers/contact';
+
+@import 'helpers/misc';
+
+html {
+  height: 100%;
+}
+
+body {
+  display: table;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-size: 12px;
+  i.icon {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  a {
+    color: $color-secondary;
+    @include transition(color 0.3s);
+    &:hover {
+      color: darken($color-secondary, 20%);
+    }
+  }
+}
+
+#header {
+  display: block;
+}
+
+#content {
+  display: block;
+  vertical-align: top;
+}
+
+#footer {
+  display: block;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px !important;
+  }
+  h2 {
+    font-size: 20px !important;
+  }
+
+  h3 {
+    font-size: 16px !important;
+  }
+
+  h4 {
+    font-size: 12px !important;
+  }
+}
+
+h1, h2, h3, h4, h5, h6,
+.title {
+  overflow: hidden;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-weight: normal;
+  .center {
+    text-align: center;
+  }
+  &.center-sm {
+    @media (min-width: 768px) and (max-width: 992px) {
+      text-align: center;
+    }
+  }
+  a {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-weight: normal;
+  }
+}
+
+.section {
+  padding: 20px 0px 20px 0px;
+}
+
+.default {
+  background-color: $color-primary-darker;
+}
+
+.default-dark {
+  background-color: $color-primary-darkest;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.gray {
+  background-color: $color-gray;
+}
+
+.gray-light {
+  background-color: $color-gray-light;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.gradient {
+  @include background(linear-gradient(top, #d8e4ef, #e2e8ed));
+}
+
+.image-padding {
+  padding-right: 5px;
+}
+
+
+.block-header {
+  border-bottom: 0px;
+  display: table;
+  margin: 20px 0px;
+  line-height: 1em;
+  padding: 0px;
+  width: 100%;
+  .title-wrapper {
+    display: table-row;
+    .title {
+      display: table-cell;
+      width: 1px;
+      white-space: nowrap;
+      h2 {
+        font-size: 30px;
+        font-weight: normal;
+        margin: 10px 0px;
+        padding-right: 30px;
+      }
+      &.center, &.right {
+        h2 {
+          padding-left: 30px;
+        }
+      }
+      &.right {
+        h2 {
+          padding-right: 0px;
+        }
+      }
+
+    }
+    .line {
+      display: table-cell;
+      vertical-align: middle;
+      hr {
+        border: 0px;
+        border-top: 1px solid rgba(0, 0, 0, .1);
+        margin-top: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .page-header-inner {
+    .heading {
+      h1 {
+        font-size: 24px;
+      }
+      h2 {
+        font-size: 18px;
+      }
+      h3 {
+        font-size: 14px;
+      }
+    }
+    // .line { display: none; }
+  }
+}
+
+.star-rating {
+  height: 24px;
+  margin-bottom: 15px;
+  .star-rating-control {
+    .star {
+      @include transition(all 0.2s);
+      color: $color-gray;
+      font-size: 24px;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      &.star-rating-on {
+        color: $color-secondary;
+      }
+      &.star-rating-hover {
+        color: darken($color-secondary, 15%);
+      }
+      a {
+        text-indent: -9999px;
+        display: block;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
